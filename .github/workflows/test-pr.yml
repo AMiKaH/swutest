@@ -36,6 +36,7 @@ jobs:
 
       - name: Generate coverage report
         run: |
+        dir
           cd pytest
           dir
           coverage run -m unittest test_pytest.py
