@@ -38,10 +38,10 @@ jobs:
           dir
           coverage run -m unittest test_pytest.py
           
-      - name: get json
+      - name: get xml
         run: |  
           dir
-          coverage json
+          coverage xml
         
       - name: Upload
         run: |
