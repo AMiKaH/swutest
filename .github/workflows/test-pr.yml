@@ -7,7 +7,7 @@ jobs:
   collect-backend-coverage:
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./backend/pytest
 
     runs-on: ubuntu-latest
 
@@ -47,7 +47,7 @@ jobs:
       - name: Collect Backend Report
         run: |
           cd pytest
-          cc-test-reporter upload-coverage -t lcov -o backend.json .coverage -p 
+          cc-test-reporter after-build -o backend.json .coverage
 
       # - name: Create backend coverage file artifact
       #   uses: actions/upload-artifact@v2
