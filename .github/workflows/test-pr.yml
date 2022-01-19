@@ -37,7 +37,9 @@ jobs:
         run: dir
 
       - name: cd pytest
-        run: cd pytest
+        run: |
+          cd pytest
+          dir
 
       - name: print dir
         run: dir
