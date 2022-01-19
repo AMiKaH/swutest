@@ -1,6 +1,6 @@
 name: CodeClimate-Checks
 on:
-  [push, pull, workflow_dispatch]
+  [push, pull_request, workflow_dispatch]
 
 jobs:
   
