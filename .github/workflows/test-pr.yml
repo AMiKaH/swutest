@@ -35,13 +35,14 @@ jobs:
 
 
       - name: Generate coverage report
-        run: coverage run -m unittest test_pytest.py
+        run: 
 
       - name: Run report generator
-        run: coverage report -m
-
-      - name: Collect Backend Report
         run: |
+          dir
+          coverage run -m unittest test_pytest.py
+          dir
+          coverage report -m
           dir
           cc-test-reporter after-build -t COVERAGE_FILE .coverage
 
