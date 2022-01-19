@@ -1,9 +1,6 @@
 name: CodeClimate-Checks
 on:
-  push:
-    branches-ignore:
-      - 'test'
-  workflow_dispatch:
+  [push, pull, workflow_dispatch]
 
 jobs:
   
