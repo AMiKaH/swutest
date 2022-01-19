@@ -46,4 +46,4 @@ jobs:
       - name: Upload
         run: |
           dir
-          cc-test-reporter after-build -t lcov-json
+          cc-test-reporter after-build -t coverage.py -i .coverage
