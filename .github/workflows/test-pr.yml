@@ -41,6 +41,7 @@ jobs:
 
       - name: Run report generator
         run: |
+          cd pytest
           coverage report -m
 
       - name: Collect Backend Report
