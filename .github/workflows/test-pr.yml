@@ -39,8 +39,7 @@ jobs:
           coverage run -m unittest test_pytest.py
           dir
           coverage report -m
-          dir
-          cc-test-reporter after-build -t COVERAGE_FILE .coverage
+          cc-test-reporter after-build -t cobertura
 
       # - name: Create backend coverage file artifact
       #   uses: actions/upload-artifact@v2
