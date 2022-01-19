@@ -38,6 +38,6 @@ jobs:
           dir
           coverage run -m unittest test_pytest.py
           dir
-          coverage html
+          coverage json
           dir
-          cc-test-reporter after-build -t coverage.py
+          cc-test-reporter after-build -t lcov-json
