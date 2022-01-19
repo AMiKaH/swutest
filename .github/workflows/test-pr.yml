@@ -20,7 +20,6 @@ jobs:
       - name: Setup Python 3.10
         uses: actions/setup-python@v1
         with:
-          # Semantic version range syntax or exact version of a dotnet versions
           python-version: '3.10'
 
       - name: Install Coverage
@@ -34,6 +33,9 @@ jobs:
 
       - run: cc-test-reporter before-build
 
+      - name: print dir
+        run: dir
+        
       - name: Generate coverage report
         run: |
           coverage run -m unittest test_pytest.py
