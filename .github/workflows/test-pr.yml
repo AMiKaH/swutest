@@ -41,7 +41,9 @@ jobs:
         run: coverage report -m
 
       - name: Collect Backend Report
-        run: cc-test-reporter after-build -t .coverage
+        run: |
+          dir
+          cc-test-reporter after-build -t COVERAGE_FILE .coverage
 
       # - name: Create backend coverage file artifact
       #   uses: actions/upload-artifact@v2
