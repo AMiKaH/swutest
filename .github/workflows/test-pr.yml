@@ -38,12 +38,12 @@ jobs:
           dir
           coverage run -m unittest test_pytest.py
           
-        - name: get json
-          run: |  
+      - name: get json
+        run: |  
           dir
           coverage json
-          
-        - name: Upload
-          run: |
+        
+      - name: Upload
+        run: |
           dir
           cc-test-reporter after-build -t lcov-json
