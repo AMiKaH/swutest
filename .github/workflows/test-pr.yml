@@ -35,21 +35,13 @@ jobs:
 
 
       - name: Generate coverage report
-        run: |
-          dir
-          cd pytest
-          dir
-          coverage run -m unittest test_pytest.py
+        run: coverage run -m unittest test_pytest.py
 
       - name: Run report generator
-        run: |
-          cd pytest
-          coverage report -m
+        run: coverage report -m
 
       - name: Collect Backend Report
-        run: |
-          cd pytest
-          cc-test-reporter after-build -o backend.json .coverage
+        run: cc-test-reporter after-build -o backend.json .coverage
 
       # - name: Create backend coverage file artifact
       #   uses: actions/upload-artifact@v2
