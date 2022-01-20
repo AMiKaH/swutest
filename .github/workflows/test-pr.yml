@@ -3,55 +3,56 @@ on:
   [push, pull_request, workflow_dispatch]
 
 jobs:
-    collect-frontend-coverage:
-      defaults:
-        run:
-          working-directory: ./frontend/react-test
+  collect-frontend-coverage:
+    defaults:
+      run:
+        working-directory: ./frontend/react-test
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      strategy:
-        matrix:
-          node-version: [14.x]
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-      steps:
-        - uses: actions/checkout@v2
-        - name: Node ${{ matrix.node-version }}
-          uses: actions/setup-node@v2
-          with:
-            node-version: ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-        - name: Install dependencies
-          run: npm install   
-          
-        - uses: amancevice/setup-code-climate@v0
-          with:
-            cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
-            cc_test_reporter_version: latest  # optional
+      - name: Install dependencies
+        run: npm install   
+        
+      - uses: amancevice/setup-code-climate@v0
+        with:
+          cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
+          cc_test_reporter_version: latest  # optional
 
-        - run: cc-test-reporter before-build
+      - run: cc-test-reporter before-build
 
-        - name: Run report generator
-          run: |
-            dir
-            npm test -- --coverage
-                    
-        # - name: Upload
-        #   run: |
-        #     dir
-        #     cc-test-reporter after-build -t lcov
+      - name: Run report generator
+        run: |
+          dir
+          npm test -- --coverage
+                  
+      # - name: Upload
+      #   run: |
+      #     dir
+      #     cc-test-reporter after-build -t lcov
 
-        - name: Collect frontend coverage
-          run: |
-            dir
-            cc-test-reporter format-coverage -t lcov -o coverage/frontend.json 
+      - name: Collect frontend coverage
+        run: |
+          dir
+          cc-test-reporter format-coverage -t lcov -o coverage/frontend.json 
 
-        - name: Create backend coverage file artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: frontend
-            path: ./coverage/frontend.json
-            retention-days: 1
+      - name: Create backend coverage file artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: frontend
+          path: ./coverage/frontend.json
+          retention-days: 1
+
 
   collect-backend-coverage:
     defaults:
@@ -108,6 +109,7 @@ jobs:
           name: backend
           path: ./coverage/backend.json
           retention-days: 1
+
 
   codeclimate-sum-coverage:
     needs: [ collect-frontend-coverage, collect-backend-coverage ]
