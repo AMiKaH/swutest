@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: frontend
-          path: ./coverage/frontend.json
+          path: ./frontend/react-test/coverage/frontend.json
           retention-days: 1
 
 
@@ -107,7 +107,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: backend
-          path: ./coverage/backend.json
+          path: ./backend/pytest/coverage/backend.json
           retention-days: 1
         
 
