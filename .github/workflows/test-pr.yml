@@ -102,6 +102,9 @@ jobs:
         run: |
           dir
           cc-test-reporter format-coverage -t coverage.py -o ./coverage/backend.json
+          dir
+          cd coverage
+          dir
 
       - name: Create backend coverage file artifact
         uses: actions/upload-artifact@v2
