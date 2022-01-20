@@ -31,20 +31,11 @@ jobs:
 
       - run: cc-test-reporter before-build
 
-      - name: Run report generator
-        run: |
-          dir
-          npm test -- --coverage
+      - name: Run test and generate report
+        run: npm test -- --coverage
                   
-      # - name: Upload
-      #   run: |
-      #     dir
-      #     cc-test-reporter after-build -t lcov
-
       - name: Collect frontend coverage
-        run: |
-          dir
-          cc-test-reporter format-coverage -t lcov -o coverage/frontend.json 
+        run: cc-test-reporter format-coverage -t lcov -o coverage/frontend.json 
 
       - name: Create frontend coverage file artifact
         uses: actions/upload-artifact@v2
@@ -83,21 +74,14 @@ jobs:
 
       - run: cc-test-reporter before-build
 
-      - name: Run report generator
-        run: |
-          dir
-          coverage run -m unittest test_pytest.py
+      - name: Generate report
+        run: coverage run -m unittest test_pytest.py
           
-      - name: get xml
-        run: |  
-          dir
-          coverage xml
-        
-      # - name: Upload
-      #   run: |
+      # - name: get xml
+      #   run: |  
       #     dir
-      #     cc-test-reporter after-build -t coverage.py -d
-
+      #     coverage xml
+        
       - name: Collect Backend Report
         run: |
           dir
@@ -110,7 +94,6 @@ jobs:
           path: ./backend/pytest/coverage/backend.json
           retention-days: 1
         
-
 
   codeclimate-sum-coverage:
     needs: [ collect-frontend-coverage, collect-backend-coverage ]
