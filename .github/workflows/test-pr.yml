@@ -46,7 +46,7 @@ jobs:
           dir
           cc-test-reporter format-coverage -t lcov -o coverage/frontend.json 
 
-      - name: Create backend coverage file artifact
+      - name: Create frontend coverage file artifact
         uses: actions/upload-artifact@v2
         with:
           name: frontend
@@ -101,15 +101,15 @@ jobs:
       - name: Collect Backend Report
         run: |
           dir
-          cc-test-reporter format-coverage -t coverage.py -o ./coverage/backend.json
+          cc-test-reporter format-coverage -t coverage.py -o coverage/backend.json
 
       - name: Create backend coverage file artifact
-        run: dir
         uses: actions/upload-artifact@v2
         with:
           name: backend
           path: ./coverage/backend.json
           retention-days: 1
+        
 
 
   codeclimate-sum-coverage:
