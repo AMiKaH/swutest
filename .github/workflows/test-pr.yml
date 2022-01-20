@@ -74,13 +74,11 @@ jobs:
 
       - run: cc-test-reporter before-build
 
-      - name: Generate report
+      - name: Run unit tests
         run: coverage run -m unittest test_pytest.py
           
-      # - name: get xml
-      #   run: |  
-      #     dir
-      #     coverage xml
+      - name: Generate xml coverage report
+        run: coverage xml
         
       - name: Collect Backend Report
         run: |
