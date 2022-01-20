@@ -6,7 +6,7 @@ jobs:
     collect-frontend-coverage:
       defaults:
         run:
-          working-directory: ./frontend/react-test
+          working-directory: /frontend/react-test
 
       runs-on: ubuntu-latest
 
