@@ -3,6 +3,42 @@ on:
   [push, pull_request, workflow_dispatch]
 
 jobs:
+    collect-frontend-coverage:
+    defaults:
+      run:
+        working-directory: ./frontend/react-test
+
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          python: ['3.10']
+
+      steps:
+        - name: Use Node.js 14.x
+          uses: actions/setup-node@v1
+          with:
+            node-version: 14.x
+        - name: Install dependencies
+          run: npm install   
+          
+        - uses: amancevice/setup-code-climate@v0
+          with:
+            cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
+            cc_test_reporter_version: latest  # optional
+
+        - run: cc-test-reporter before-build
+
+        - name: Run report generator
+          run: |
+            dir
+            npm test -- --coverage
+                    
+        - name: Upload
+          run: |
+            dir
+            cc-test-reporter after-build -t lcov
+
   # collect-backend-coverage:
   #   defaults:
   #     run:
@@ -46,39 +82,3 @@ jobs:
   #       run: |
   #         dir
   #         cc-test-reporter after-build -t coverage.py -d
-
-    collect-backend-coverage:
-    defaults:
-      run:
-        working-directory: ./frontend/react-test
-
-      runs-on: ubuntu-latest
-
-      strategy:
-        matrix:
-          python: ['3.10']
-
-      steps:
-        - name: Use Node.js 14.x
-          uses: actions/setup-node@v1
-          with:
-            node-version: 14.x
-        - name: Install dependencies
-          run: npm install   
-          
-        - uses: amancevice/setup-code-climate@v0
-          with:
-            cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
-            cc_test_reporter_version: latest  # optional
-
-        - run: cc-test-reporter before-build
-
-        - name: Run report generator
-          run: |
-            dir
-            npm test -- --coverage
-                    
-        - name: Upload
-          run: |
-            dir
-            cc-test-reporter after-build -t lcov
