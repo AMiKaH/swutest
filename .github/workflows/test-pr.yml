@@ -101,7 +101,7 @@ jobs:
       - name: Collect Backend Report
         run: |
           dir
-          cc-test-reporter format-coverage -t lcov -o ./coverage/backend.json
+          cc-test-reporter format-coverage -t coverage.py -o ./coverage/backend.json
 
       - name: Create backend coverage file artifact
         uses: actions/upload-artifact@v2
