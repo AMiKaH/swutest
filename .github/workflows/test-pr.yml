@@ -30,7 +30,7 @@ jobs:
       - name: Test sha 
         run: |
           echo "${{github.EVENT_NAME}}"
-          echo "Head Branch: ${GITHUB_HEAD_REF}"
+          echo "Head Branch: ${GIT_BRANCH}"
           echo "Base Branch: ${GITHUB_REF}"
           echo "COMMIT SHA: ${GITHUB_SHA}"
 
