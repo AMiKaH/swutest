@@ -2,10 +2,10 @@ name: CodeClimate-Checks
 on:
   push:
     branches:
-      - main
-    pull_request:
-      branches:
-        - main
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
   workflow_dispatch:
 
 jobs:
