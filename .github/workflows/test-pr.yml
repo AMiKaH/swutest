@@ -29,7 +29,8 @@ jobs:
 
       - name: Test sha 
         run: |
-          echo "Branch: ${{ github.head_ref }}"
+          echo "Head Branch: ${GITHUB_HEAD_REF}"
+          echo "Base Branch: ${GITHUB_REF}"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Install dependencies
