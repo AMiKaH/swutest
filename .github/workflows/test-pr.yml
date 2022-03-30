@@ -21,6 +21,11 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: Test sha 
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - uses: actions/checkout@v2
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v2
