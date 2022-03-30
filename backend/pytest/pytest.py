@@ -12,7 +12,7 @@ def divide(x, y):
         raise ValueError('Cannot divide by zero!')
     return x / y
 
-def random(x, y) {
+def random(x, y) :
     if x == 0:
         return y
     
@@ -23,4 +23,4 @@ def random(x, y) {
         return x*y
     
     return x+y
-}
+
