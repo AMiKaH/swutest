@@ -1,12 +1,12 @@
 name: CodeClimate-Checks
 on:
-  - push:
+  push:
     branches:
       - main
-  - pull_request:
-    - branches-ignore:
+  pull_request:
+    branches-ignore:
       - main
-  - workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   collect-frontend-coverage:
