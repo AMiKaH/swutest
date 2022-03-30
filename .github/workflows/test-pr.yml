@@ -30,9 +30,9 @@ jobs:
       - name: Test sha 
         run: |
           echo "${{github.EVENT_NAME}}"
-          echo "Head Branch: ${{GITHUB_HEAD_REF}}"
+          echo "Head Branch: ${GITHUB_HEAD_REF}"
           echo "Base Branch: ${GITHUB_REF}"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "COMMIT SHA: ${GITHUB_SHA}"
 
       - name: Install dependencies
         run: npm install   
