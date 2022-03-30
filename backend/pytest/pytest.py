@@ -36,3 +36,15 @@ def random2(x, y) :
     
     return x+y
 
+def random2(x, y) :
+    if x == 0:
+        return y
+    
+    if y == 0:
+        return x
+
+    if x + y == 2:
+        return x*y
+    
+    return x+y
+
