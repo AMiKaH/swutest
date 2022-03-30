@@ -29,9 +29,9 @@ jobs:
 
       - name: Test sha 
         run: |
+          echo "Branch: ${{ steps.vars.outputs.branch }}"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-          
+
       - name: Install dependencies
         run: npm install   
         
