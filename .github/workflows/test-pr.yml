@@ -28,6 +28,7 @@ jobs:
           echo "COMMIT SHA: ${GITHUB_SHA}"
 
   collect-frontend-coverage:
+    needs: [ get-main-branch-sha ]
     defaults:
       run:
         working-directory: ./frontend/react-test
