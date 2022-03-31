@@ -1,27 +1,68 @@
 name: CodeClimate-Checks
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches-ignore:
-      - main
+    # branches:
+    #   - 'main'
+  # pull_request:
+  #   branches:
+  #     - 'main'
   workflow_dispatch:
 
 jobs:
+  get-main-branch-sha:
+    runs-on: ubuntu-latest
+    outputs:
+      run_rest_of_jobs: ${{ steps.set_output.outputs.run_jobs }}
+
+    steps:
+      - name: checkout-main
+        uses: actions/checkout@v2
+        id: tests
+        with:
+          ref: 'main'
+      
+      - name: new-sha 
+        id: get-sha
+        run: |
+          echo ::set-output name=sha::$( curl -u "u:${{github.token}}" https://api.github.com/repos/AMiKaH/swutest/git/ref/heads/main | jq .object.sha | tr -d '"' )
+
+      # - name: Test-sha 
+      #   env: 
+      #     DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
+      #   run: |
+      #     echo "steps: ${{env.DEFAULT_SHA}}"
+      #     echo "Default Branch: ${{github.event.repository.default_branch}}"
+      #     echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
+      #     echo "Base Branch: ${GITHUB_REF}"
+      #     echo "COMMIT SHA: ${GITHUB_SHA}"
+
+      - name: set-output
+        id: set_output
+        env: 
+          DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
+        run: |
+          if [${DEFAULT_SHA} == ${GITHUB_SHA}]
+          then
+            echo "::set-output name=run_jobs::false"
+          else            
+            echo "::set-output name=run_jobs::true"
+          fi
+
   collect-frontend-coverage:
+    needs: [get-main-branch-sha]
+    if: needs.get-main-branch-sha.outputs.run_rest_of_jobs == 'true'
     defaults:
       run:
         working-directory: ./frontend/react-test
 
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -52,6 +93,8 @@ jobs:
 
 
   collect-backend-coverage:
+    needs: [get-main-branch-sha]
+    if: needs.get-main-branch-sha.outputs.run_rest_of_jobs == 'true'
     defaults:
       run:
         working-directory: ./backend/pytest
