@@ -13,14 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout-main
+        uses: actions/checkout@v2
+        id: checkout
         with:
           ref: 'main'
-          run: | 
+          run: 
             echo "COMMIT SHA: ${GITHUB_SHA}"
         
       - name: Test sha 
         run: |
+          echo "steps: ${{ steps.tests.checkout.stdout }} "
           echo "Default Branch: ${{github.event.repository.default_branch}}"
           echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
           echo "Base Branch: ${GITHUB_REF}"
