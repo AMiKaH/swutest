@@ -18,8 +18,6 @@ jobs:
         id: checkout
         with:
           ref: 'main'
-          run: 
-            echo "COMMIT SHA: ${GITHUB_SHA}"
         
       - name: Test sha 
         run: |
