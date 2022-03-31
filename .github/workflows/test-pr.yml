@@ -36,7 +36,7 @@ jobs:
 
       - shell: bash
         run: |
-          ${env.SHA_TEST} > default-branch-sha.txt
+          $SHA_TEST > default-branch-sha.txt
 
       - name: Upload default branch sha
         uses: actions/upload-artifact@v2
