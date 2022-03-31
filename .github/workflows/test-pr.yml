@@ -33,7 +33,6 @@ jobs:
         working-directory: ./frontend/react-test
 
     runs-on: ubuntu-latest
-ab244e5016303445027d6683bf9597ef683eaf03
     strategy:
       matrix:
         node-version: [14.x]
