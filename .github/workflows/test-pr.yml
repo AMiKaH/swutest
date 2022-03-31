@@ -41,7 +41,7 @@ jobs:
         env: 
           DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
         run: |
-          echo "::set-output name=run_jobs::${{ DEFAULT_SHA == GITHUB_SHA && false || true }}"
+          echo "::set-output name=run_jobs::${{ env.DEFAULT_SHA == GITHUB_SHA && false || true }}"
           # if $[[${DEFAULT_SHA} == ${GITHUB_SHA}]]; then
           #   echo "::set-output name=run_jobs::true"
           # else            
