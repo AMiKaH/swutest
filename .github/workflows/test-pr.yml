@@ -53,7 +53,7 @@ jobs:
             echo "::set-output name=run_jobs::true"
           fi
           echo "Default SHA: ${{env.DEFAULT_SHA}}"
-          echo "COMMIT SHA: ${GITHUB_SHA}""
+          echo "COMMIT SHA: ${GITHUB_SHA}"
 
   collect-frontend-coverage:
     needs: [get-main-branch-sha]
