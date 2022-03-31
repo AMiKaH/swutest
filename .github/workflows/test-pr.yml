@@ -39,8 +39,8 @@ jobs:
       - name: set-output
         id: set_output
         run: |
-          if ${env.DEFAULT_SHA == $GITHUB_SHA}; then
-            echo "::set-output name=run_jobs::false"
+          if ${env.DEFAULT_SHA == GITHUB_SHA}; then
+            echo "::set-output name=run_jobs::truea"
           else            
             echo "::set-output name=run_jobs::false"
           fi
