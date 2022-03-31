@@ -41,7 +41,7 @@ jobs:
         env: 
           DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
         run: |
-          if [ -v ${GITHUB_SHA} || ]
+          if [ -v ${GITHUB_SHA} ]
           then
             if [${DEFAULT_SHA} == ${GITHUB_SHA}]
             then
