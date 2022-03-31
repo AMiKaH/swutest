@@ -21,7 +21,7 @@ jobs:
         
       - name: Test sha 
         env: 
-          SHA_TEST: ${{ steps.tests.output.output1 }}
+          SHA_TEST: ${{ steps.tests.output.sha }}
         run: |
           echo "steps: ${{env.SHA_TEST}}"
           echo "Default Branch: ${{github.event.repository.default_branch}}"
