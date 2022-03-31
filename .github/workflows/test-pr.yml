@@ -15,13 +15,13 @@ jobs:
     steps:
       - name: checkout-main
         uses: actions/checkout@v2
-        id: checkout
+        id: tests
         with:
           ref: 'main'
         
       - name: Test sha 
         run: |
-          echo "steps: ${{ steps.tests.checkout.stdout }} "
+          echo "steps: ${{ steps.tests.outputs.stdout }} "
           echo "Default Branch: ${{github.event.repository.default_branch}}"
           echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
           echo "Base Branch: ${GITHUB_REF}"
