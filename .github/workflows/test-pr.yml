@@ -39,12 +39,14 @@ jobs:
       - name: set-output
         id: set_output
         run: |
-          if[[$env.DEFAULT_SHA == $GITHUB_SHA]]; then
+          if${{env.DEFAULT_SHA == GITHUB_SHA}}; then
             echo "::set-output name=run_jobs::false"
           else            
             echo "::set-output name=run_jobs::true"
 
   collect-frontend-coverage:
+    needs: [get-main-branch-sha]
+    if: needs.get-main-branch-sha.outputs.run_rest_of_jobs == 'true'
     defaults:
       run:
         working-directory: ./frontend/react-test
@@ -87,6 +89,8 @@ jobs:
 
 
   collect-backend-coverage:
+    needs: [get-main-branch-sha]
+    if: needs.get-main-branch-sha.outputs.run_rest_of_jobs == 'true'
     defaults:
       run:
         working-directory: ./backend/pytest
