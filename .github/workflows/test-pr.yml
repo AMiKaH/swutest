@@ -41,12 +41,12 @@ jobs:
         env: 
           DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
         run: |
-          echo "::set-output name=run_jobs::${{ env.DEFAULT_SHA == GITHUB_SHA && false || true }}"
-          # if $[[${DEFAULT_SHA} == ${GITHUB_SHA}]]; then
-          #   echo "::set-output name=run_jobs::true"
-          # else            
-          #   echo "::set-output name=run_jobs::false"
-          # fi
+          if [${DEFAULT_SHA} == ${GITHUB_SHA}]
+          then
+            echo "::set-output name=run_jobs::true"
+          else            
+            echo "::set-output name=run_jobs::false"
+          fi
 
   collect-frontend-coverage:
     needs: [get-main-branch-sha]
