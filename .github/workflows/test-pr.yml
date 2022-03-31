@@ -47,7 +47,7 @@ jobs:
           then
             echo "setting to true, default branch"      
             echo "::set-output name=run_jobs::true"
-          if [ "$DEFAULT_SHA" == "$GITHUB_SHA" ]; 
+          elif [ "$DEFAULT_SHA" == "$GITHUB_SHA" ]; 
           then
             echo "setting to false"
             echo "::set-output name=run_jobs::false"
