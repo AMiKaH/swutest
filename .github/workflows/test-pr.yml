@@ -12,7 +12,6 @@ jobs:
   get-main-branch-sha:
     runs-on: ubuntu-latest
 
-  collect-frontend-coverage:
     defaults:
       run:
         working-directory: ./frontend/react-test
