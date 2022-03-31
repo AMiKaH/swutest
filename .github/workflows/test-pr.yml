@@ -12,9 +12,7 @@ jobs:
   get-main-branch-sha:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./frontend/react-test
+  collect-frontend-coverage:
 
     - uses: actions/checkout@v2
       with:
@@ -25,6 +23,11 @@ jobs:
         echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
         echo "Base Branch: ${GITHUB_REF}"
         echo "COMMIT SHA: ${GITHUB_SHA}"
+
+  collect-frontend-coverage:
+    defaults:
+      run:
+        working-directory: ./frontend/react-test
 
     runs-on: ubuntu-latest
 
