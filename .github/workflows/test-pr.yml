@@ -11,6 +11,8 @@ on:
 jobs:
   get-main-branch-sha:
     runs-on: ubuntu-latest
+    outputs:
+      run_rest_of_jobs: ${{ steps.set_output.outputs.run_jobs }}
 
     steps:
       - name: checkout-main
@@ -26,24 +28,21 @@ jobs:
 
       - name: Test-sha 
         env: 
-          SHA_TEST: ${{ steps.get-sha.outputs.sha }}
+          DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
         run: |
-          echo "steps: ${{env.SHA_TEST}}"
+          echo "steps: ${{env.DEFAULT_SHA}}"
           echo "Default Branch: ${{github.event.repository.default_branch}}"
           echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
           echo "Base Branch: ${GITHUB_REF}"
           echo "COMMIT SHA: ${GITHUB_SHA}"
 
-      - shell: bash
+      - name: set-output
+        id: set_output
         run: |
-          ${{SHA_TEST}} > default-branch-sha.txt
-
-      - name: Upload default branch sha
-        uses: actions/upload-artifact@v2
-        with:
-          name: defaultsha
-          path: default-branch-sha.txt
-          retention-days: 1
+          if[[$env.DEFAULT_SHA == $GITHUB_SHA]]; then
+            echo "::set-output name=run_jobs::false"
+          else            
+            echo "::set-output name=run_jobs::true"
 
   collect-frontend-coverage:
     defaults:
