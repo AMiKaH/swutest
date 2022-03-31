@@ -38,6 +38,8 @@ jobs:
 
       - name: set-output
         id: set_output
+        env: 
+          DEFAULT_SHA: ${{ steps.get-sha.outputs.sha }}
         run: |
           if $[[${DEFAULT_SHA} == ${GITHUB_SHA}]]; then
             echo "::set-output name=run_jobs::true"
