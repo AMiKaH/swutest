@@ -35,15 +35,15 @@ jobs:
           echo "COMMIT SHA: ${GITHUB_SHA}"
 
       - shell: bash
-          run: |
-            expr ${{env.SHA_TEST}} > default-branch-sha.txt
+        run: |
+          expr ${{env.SHA_TEST}} > default-branch-sha.txt
 
       - name: Upload default branch sha
-          uses: actions/upload-artifact@v2
-          with:
-            name: defaultsha
-            path: default-branch-sha.txt
-            retention-days: 1
+        uses: actions/upload-artifact@v2
+        with:
+          name: defaultsha
+          path: default-branch-sha.txt
+          retention-days: 1
 
   collect-frontend-coverage:
     defaults:
