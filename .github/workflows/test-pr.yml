@@ -45,11 +45,14 @@ jobs:
           then
             if [${DEFAULT_SHA} == ${GITHUB_SHA}]
             then
+              echo "setting to false"
               echo "::set-output name=run_jobs::false"
-            else            
+            else      
+              echo "setting to true, SET"      
               echo "::set-output name=run_jobs::true"
             fi
           else
+            echo "setting to true, NOT SET"  
             echo "::set-output name=run_jobs::true"
           fi
           echo "Default SHA: ${{env.DEFAULT_SHA}}"
