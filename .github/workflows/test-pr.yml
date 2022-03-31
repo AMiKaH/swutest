@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: 'main'
-        run: | 
-          echo "COMMIT SHA: ${GITHUB_SHA}"
+          run: | 
+            echo "COMMIT SHA: ${GITHUB_SHA}"
         
       - name: Test sha 
         run: |
