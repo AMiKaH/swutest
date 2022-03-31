@@ -23,7 +23,7 @@ jobs:
         env: 
           SHA_TEST: ${{ steps.tests.output.stdout }}
         run: |
-          echo "steps: $SHA_TEST"
+          echo "steps: $env.SHA_TEST"
           echo "Default Branch: ${{github.event.repository.default_branch}}"
           echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
           echo "Base Branch: ${GITHUB_REF}"
