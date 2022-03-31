@@ -21,7 +21,7 @@ jobs:
         
       - name: Test sha 
         run: |
-          echo "steps: ${ steps.tests.outputs.stdout } "
+          echo "steps: ${{ steps.tests }} "
           echo "Default Branch: ${{github.event.repository.default_branch}}"
           echo "Default Branch SHA: ${{github.event.repository.default_branch.github_sha}}"
           echo "Base Branch: ${GITHUB_REF}"
