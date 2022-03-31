@@ -26,7 +26,7 @@ jobs:
 
       - name: Test sha 
         env: 
-          SHA_TEST: ${{ steps.get-sha.output.commit }}
+          SHA_TEST: ${{ steps.get-sha.output.sha }}
 
         run: |
           echo "steps: ${{env.SHA_TEST}}"
